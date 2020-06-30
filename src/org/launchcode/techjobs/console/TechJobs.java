@@ -2,6 +2,7 @@ package org.launchcode.techjobs.console;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -61,7 +62,7 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -110,7 +111,40 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        String format = "*****";
+        int counter = 0;
+
+        System.out.println(format);
+
+        if (someJobs.size() < 1){
+            System.out.println("Sorry, your search did not yield any results. Try again");
+        }
+
+        for(int i = 0; i < someJobs.size(); i++){
+            System.out.println(format);
+            for(Map.Entry<String, String> job : someJobs.get(i).entrySet()){
+
+//                System.out.println(counter + "Seeing what job is and what someJobs.get(i) returns");
+//                System.out.println("Job: " + job);
+//                System.out.println("someJobs.get(i): " + someJobs.get(i));
+                System.out.println(job.getKey() + ": " + job.getValue());
+//                counter++;
+            }
+            System.out.println(format + "\n");
+/*            System.out.println(counter + "Iterating through the array list someJobs");
+            System.out.println(someJobs.get(i)); */
+//            counter++;
+        }
+
+/*        counter = 0;
+
+        for(HashMap<String, String> item : someJobs){
+            System.out.println("\n" + counter);
+            System.out.println(item);
+            counter++;
+        }
 
         System.out.println("printJobs is not implemented yet");
+        System.out.println(format); */
     }
 }
